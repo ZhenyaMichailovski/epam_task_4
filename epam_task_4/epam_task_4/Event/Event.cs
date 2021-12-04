@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace epam_task_4.Event
 {
     public delegate void Result();
+
+    /// <summary>
+    /// Event class
+    /// </summary>
     class Event
     {
         public event Result ResultEvent;

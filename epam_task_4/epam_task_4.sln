@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "epam_task_4", "epam_task_4\epam_task_4.csproj", "{5728AF12-4198-4F63-BE87-D396EE5CED38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "epam_task_4", "epam_task_4\epam_task_4.csproj", "{5728AF12-4198-4F63-BE87-D396EE5CED38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLibrary", "TestLibrary\TestLibrary.csproj", "{3F1A65CF-8AF0-49EB-B782-221437A78A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5728AF12-4198-4F63-BE87-D396EE5CED38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5728AF12-4198-4F63-BE87-D396EE5CED38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5728AF12-4198-4F63-BE87-D396EE5CED38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F1A65CF-8AF0-49EB-B782-221437A78A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F1A65CF-8AF0-49EB-B782-221437A78A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F1A65CF-8AF0-49EB-B782-221437A78A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F1A65CF-8AF0-49EB-B782-221437A78A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

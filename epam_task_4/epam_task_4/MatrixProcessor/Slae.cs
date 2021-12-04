@@ -6,12 +6,27 @@ using System.Threading.Tasks;
 
 namespace epam_task_4.MatrixProcessor
 {
-    class Slae
+    /// <summary>
+    /// class with matrix data
+    /// </summary>
+    public class Slae
     {
+        /// <summary>
+        /// dimension of the matrix
+        /// </summary>
         public int N { get { return Columns.Length; } }
-        private double[,] matrix;
+
+        /// <summary>
+        /// main matrix
+        /// </summary>
+        private double[][] matrix;
+
+        /// <summary>
+        /// free members
+        /// </summary>
         public double[] Columns { get; private set; }
-        public double[,] Matrix
+
+        public double[][] Matrix
         {
             get { return matrix; }
             private set
@@ -20,7 +35,7 @@ namespace epam_task_4.MatrixProcessor
             }
         }
 
-        public Slae(double[,] matrix, double[] b)
+        public Slae(double[][] matrix, double[] b)
         {
             if (matrix.Length == b.Length)
             {

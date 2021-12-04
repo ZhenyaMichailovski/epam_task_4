@@ -9,15 +9,30 @@ using System.Threading.Tasks;
 
 namespace epam_task_4
 {
-    class TCP_IP_Server
+    /// <summary>
+    /// Server class
+    /// </summary>
+    public class TCP_IP_Server
     {
+        /// <summary>
+        /// Ip of server
+        /// </summary>
         const string ip = "127.0.0.1";
 
+        /// <summary>
+        /// Port of server
+        /// </summary>
         const int port = 8080;
 
         Event.Event myEvent = new Event.Event();
 
-        public string ServerData(int clientNum, Event.Result result)
+        /// <summary>
+        /// a method for transmitting data from the server and receiving data from the client
+        /// </summary>
+        /// <param name="clientNum">clien num</param>
+        /// <param name="result">event</param>
+        /// <returns></returns>
+        public double[] ServerData(int clientNum, Event.Result result)
         {
             var tcpEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
             var tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -54,18 +69,22 @@ namespace epam_task_4
                 listener.Shutdown(SocketShutdown.Both);
                 listener.Close();
 
-                return data.ToString();
+                return answer;
             }
         }
 
+        /// <summary>
+        /// matrix processing method
+        /// </summary>
+        /// <param name="data">data form client</param>
+        /// <returns></returns>
         public double[] GaussCalculate(StringBuilder data)
         {
-            MatrixProcessor.MatrixProcessor.GetDate(data.ToString(), out double[,] a, out double[] b);
+            MatrixProcessor.MatrixProcessor.GetDate(data.ToString(), out double[][] a, out double[] b);
 
-            GaussProcessor.GaussProcessor gaussMethod = new GaussProcessor.GaussProcessor();
             Slae slae = new Slae(a, b);
-
-            return gaussMethod.Solve(slae);
+            
+            return GaussProcessor.GaussProcessor.Solve(slae);
         }
     }
 }

@@ -7,58 +7,121 @@ using System.Threading.Tasks;
 
 namespace epam_task_4.GaussProcessor
 {
-    class GaussProcessor
+    /// <summary>
+    /// class for calculating the gauss method
+    /// </summary>
+    public static class GaussProcessor
     {
-        public double[] Solve(Slae slae)
+        /// <summary>
+        /// a method that sorts strings
+        /// </summary>
+        /// <param name="slae">matrixs</param>
+        /// <param name="SortIndex">number sorting lines</param>
+        private static void SortRows(ref Slae slae, int SortIndex)
         {
-            // Preparation : copying arrays of slae
-            // cuz, u know, it changes data in Slae 
-            // object if we'll use data from slae object properly
-            double[,] a = new double[slae.N, slae.N];
-          
-            Array.Copy(slae.Matrix, a, slae.N);
 
-            double[] b = new double[slae.N];
-            Array.Copy(slae.Columns, b, slae.N);
-
-            ForwardElimination(a, b, slae.N);
-            return BackSubstitution(a, b, slae.N);
-        }
-        private static void ForwardElimination(double[,] a, double[] b, int n)
-        {
-            for (int k = 0; k < n; k++)
+            double MaxElement = slae.Matrix[SortIndex][SortIndex];
+            int MaxElementIndex = SortIndex;
+            for (int i = SortIndex + 1; i < slae.N; i++)
             {
-                Parallel.For(k + 1, n, j =>
+                if (slae.Matrix[i][SortIndex] > MaxElement)
                 {
-                    double d = a[j, k] / a[k, k];
+                    MaxElement = slae.Matrix[i][SortIndex];
+                    MaxElementIndex = i;
+                }
+            }
 
-                    for (int i = k; i < n; i++)
+            if (MaxElementIndex > SortIndex)
+            {
+                double Temp;
+
+                Temp = slae.Columns[MaxElementIndex];
+                slae.Columns[MaxElementIndex] = slae.Columns[SortIndex];
+                slae.Columns[SortIndex] = Temp;
+
+                for (int i = 0; i < slae.N; i++)
+                {
+                    Temp = slae.Matrix[MaxElementIndex][i];
+                    slae.Matrix[MaxElementIndex][i] = slae.Matrix[SortIndex][i];
+                    slae.Matrix[SortIndex][i] = Temp;
+                }
+            }
+        }
+
+        /// <summary>
+        /// linear gauss method
+        /// </summary>
+        /// <param name="slae">matrixs</param>
+        /// <returns>answer</returns>
+        public static double[] Solve(Slae slae)
+        {
+
+            for (int i = 0; i < slae.N - 1; i++)
+            {
+                SortRows(ref slae, i);
+                for (int j = i + 1; j < slae.N; j++)
+                {
+                    if (slae.Matrix[i][i] != 0)
                     {
-                        a[j, i] = a[j, i] - d * a[k, i];
+                        double MultElement = slae.Matrix[j][i] / slae.Matrix[i][i];
+                        for (int k = i; k < slae.N; k++)
+                            slae.Matrix[j][k] -= slae.Matrix[i][k] * MultElement;
+                        slae.Columns[j] -= slae.Columns[i] * MultElement;
+                    }
+                    
+                }
+            }
+            double[] answer = new double[slae.N];
+          
+            for (int i = (int)(slae.N - 1); i >= 0; i--)
+            {
+                answer[i] = slae.Columns[i];
+
+                for (int j = (int)(slae.N - 1); j > i; j--)
+                    answer[i] -= slae.Matrix[i][j] * answer[j];
+
+                answer[i] /= slae.Matrix[i][i];
+                answer[i] = Math.Round(answer[i], 2);
+            }
+            return answer;
+        }
+
+        /// <summary>
+        /// distributed gaussian method
+        /// </summary>
+        /// <param name="slae">matrixs</param>
+        /// <returns>answers</returns>
+        public static double[] SolveParallel(Slae slae)
+        {
+
+            for (int i = 0; i < slae.N - 1; i++)
+            {
+                SortRows(ref slae, i);
+                for (int j = i + 1; j < slae.N; j++)
+                {
+                    if (slae.Matrix[i][i] != 0)
+                    {
+                        double MultElement = slae.Matrix[j][i] / slae.Matrix[i][i];
+                        Parallel.For(i, slae.N, (k) => slae.Matrix[j][k] -= slae.Matrix[i][k] * MultElement);
+
+                        slae.Columns[j] -= slae.Columns[i] * MultElement;
                     }
 
-                    b[j] = b[j] - d * b[k];
-                });
-            }
-        }
-        private static double[] BackSubstitution(double[,] a, double[] b, int n)
-        {
-            double[] x = new double[n];
-
-            for (int k = n - 1; k >= 0; k--)
-            {
-                double d = 0;
-
-                for (int j = k + 1; j < n; j++)
-                {
-                    double s = a[k, j] * x[j];
-                    d = d + s;
                 }
-
-                x[k] = (b[k] - d) / a[k, k];
             }
+            double[] answer = new double[slae.N];
 
-            return x;
+            for (int i = (int)(slae.N - 1); i >= 0; i--)
+            {
+                answer[i] = slae.Columns[i];
+
+                for (int j = (int)(slae.N - 1); j > i; j--)
+                    answer[i] -= slae.Matrix[i][j] * answer[j];
+
+                answer[i] /= slae.Matrix[i][i];
+                answer[i] = Math.Round(answer[i], 2);
+            }
+            return answer;
         }
     }
 }

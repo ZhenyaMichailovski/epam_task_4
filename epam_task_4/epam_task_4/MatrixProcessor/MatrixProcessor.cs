@@ -9,39 +9,58 @@ namespace epam_task_4.MatrixProcessor
 {
     public static class MatrixProcessor
     {
-        public static double[] GetVector(string s)
+        /// <summary>
+        /// method for processing free members from strings
+        /// </summary>
+        /// <param name="s">string of data</param>
+        /// <returns></returns>
+        private static double[] GetColumns(string s)
         {
             string[] str = s.Split('\n');
-            double[] vector = new double[str.Length];
+            double[] columns = new double[str.Length - 1];
             for (int i = 0; i < str.Length - 1; i++)
             {
-                vector[i] = Convert.ToDouble(str[i]);
+                columns[i] = Convert.ToDouble(str[i]);
             }
-            return vector;
+            return columns;
         }
 
-        public static double[,] GetMatrix(string s)
+        /// <summary>
+        /// method for processing a main matrix from a string
+        /// </summary>
+        /// <param name="s">string of data</param>
+        /// <returns></returns>
+        private static double[][] GetMatrix(string s)
         {
             string[] str = s.Split('\n');
             string rowL = Regex.Replace(str[0], @"\s+", " ", RegexOptions.None);
             rowL = rowL.Substring(1, rowL.Length - 1);
             string[] row = rowL.Split(' ');
-            double[,] matrix = new double[str.Length, row.Length];
+            double[][] matrix = new double[str.Length - 1][];
+            
             for (int i = 0; i < str.Length - 1; i++)
             {
                 rowL = Regex.Replace(str[i], @"\s+", " ", RegexOptions.None);
                 rowL = rowL.Substring(1, rowL.Length - 1);
                 row = rowL.Split(' ');
+                matrix[i] = new double[str.Length - 1];
                 for (int j = 0; j < row.Length - 1; j++)
                 {
-                    matrix[i, j] = Convert.ToDouble(row[j]);
+                    
+                    matrix[i][j] = Convert.ToDouble(row[j]);
                 }
             }
             return matrix;
         }
 
-        public static void GetDate(string str, out double[,] matrix, out double[] vector)
-        {
+        /// <summary>
+        /// matrix processing method
+        /// </summary>
+        /// <param name="str">string of data</param>
+        /// <param name="matrix">matrix</param>
+        /// <param name="columns">columns</param>
+        public static void GetDate(string str, out double[][] matrix, out double[] columns)
+         {
             string[] mas = str.Split('\n');
             StringBuilder builderA = new StringBuilder();
             for (int i = 0; i < mas.Length / 2; i++)
@@ -59,7 +78,7 @@ namespace epam_task_4.MatrixProcessor
                 builderB.Append("\n");
             }
 
-            vector = GetVector(builderB.ToString());
+            columns = GetColumns(builderB.ToString());
         }
     }
 }

@@ -1,0 +1,12 @@
+D:\Git\epam_task_4\epam_task_4\epam_task_4\bin\Debug\net5.0\epam_task_4.deps.json
+D:\Git\epam_task_4\epam_task_4\epam_task_4\bin\Debug\net5.0\epam_task_4.dll
+D:\Git\epam_task_4\epam_task_4\epam_task_4\bin\Debug\net5.0\ref\epam_task_4.dll
+D:\Git\epam_task_4\epam_task_4\epam_task_4\bin\Debug\net5.0\epam_task_4.pdb
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.csproj.AssemblyReference.cache
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.AssemblyInfoInputs.cache
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.AssemblyInfo.cs
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.csproj.CoreCompileInputs.cache
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.dll
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\ref\epam_task_4.dll
+D:\Git\epam_task_4\epam_task_4\epam_task_4\obj\Debug\net5.0\epam_task_4.pdb
